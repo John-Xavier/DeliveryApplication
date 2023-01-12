@@ -19,9 +19,8 @@ public class OrderAudit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int itemId;
-
-    @ManyToOne
-    @JoinColumn(name = "order")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_id")
     private Order order;
 
 }

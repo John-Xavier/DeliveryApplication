@@ -26,17 +26,15 @@ public class OrderService {
 
     public Order createOrder(List<Integer> itemIds, int customerId){
 
-//        List<Item> items = new ArrayList<>();
-//        for(int i:itemIds){
-//            Optional<Item> itemOptional = itemRepository.findById(i);
-//            Item item = itemOptional.get();
-//            items.add(item);
-//        }
+
+        System.out.printf("create order called");
         Optional<Customer> customer = customerRepository.findById(customerId);
         LocalDate orderDate = LocalDate.now();
     if (customer.isPresent()) {
-        System.out.printf("create order called params %d and %d",itemIds,customerId);
+        //System.out.printf("create order called params %d and %d",itemIds,customerId);
 //create order first, leave orderAudit null
+        System.out.printf("cusromer is present");
+        /**/
         Order o = new Order(0,
                 orderDate,
                 "Order Pending",
@@ -46,12 +44,10 @@ public class OrderService {
         //update order audit table
         List<OrderAudit> oaList = new ArrayList<>();
         for(int itemId:itemIds){
-            System.out.printf("item id:%d",itemId);
             OrderAudit oa = new OrderAudit(0,itemId,o);
-           // OrderAudit orderAudit = orderAuditRepository.save(oa);
+           OrderAudit orderAudit = orderAuditRepository.save(oa);
             oaList.add(oa);
         }
-        System.out.printf("after saving oa list");
         //save order again
         o.setOrderAudits(oaList);
         return orderRepository.save(o);

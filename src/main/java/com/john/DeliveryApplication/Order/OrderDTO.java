@@ -15,6 +15,5 @@ public class OrderDTO {
     private final String orderStatus;
     private final LocalDate orderDate;
     private final CustomerDTO customer;
-    //@Setter
     private final List<ItemDTO> items;
 }

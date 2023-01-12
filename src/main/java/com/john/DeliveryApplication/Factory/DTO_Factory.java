@@ -4,13 +4,12 @@ import com.john.DeliveryApplication.Customer.CustomerDTO;
 import com.john.DeliveryApplication.Driver.DriverDTO;
 import com.john.DeliveryApplication.Item.ItemDTO;
 import com.john.DeliveryApplication.Order.OrderDTO;
-import com.john.DeliveryApplication.entity.Customer;
-import com.john.DeliveryApplication.entity.Driver;
-import com.john.DeliveryApplication.entity.Item;
-import com.john.DeliveryApplication.entity.Order;
+import com.john.DeliveryApplication.Route.RouteDTO;
+import com.john.DeliveryApplication.entity.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class DTO_Factory {
@@ -65,8 +64,28 @@ public class DTO_Factory {
         }
         DriverDTO driverDTO = new DriverDTO(
                 driver.getId(),
-                driver.getDriverName()
+                driver.getDriverName(),
+                driver.getDriverPhoneNumber(),
+                null
         );
         return driverDTO;
     }
+
+
+
+    public RouteDTO create(Route route, Optional<DriverDTO> driverDTO){
+        if (route == null) {
+            return null;
+        }
+        RouteDTO routeDTO =
+                new RouteDTO(
+                        route.getId(),
+                        route.getStartLocation(),
+                        route.getEndLocation(),
+                        route.getEstimatedTime(),
+                        driverDTO
+                );
+        return routeDTO;
+    }
+
 }

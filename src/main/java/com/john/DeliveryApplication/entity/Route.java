@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @AllArgsConstructor
@@ -15,19 +14,15 @@ import java.util.List;
 @Setter
 
 @Entity
-@Table(name = "item_order")
-public class Order {
-
+@Table(name = "delivery_route")
+public class Route {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private LocalDate orderDate;
-    private String orderStatus;
-    @OneToMany(mappedBy = "order")
-    @OrderBy(value = "id")
-    private List<OrderAudit> orderAudits;
+    private String startLocation;
+    private String endLocation;
+    private String estimatedTime;
     @ManyToOne
-    @JoinColumn(name = "customer_id", nullable = false)
-    private Customer customer;
-
+    @JoinColumn(name = "driver_id")
+    private Driver driver;
 }

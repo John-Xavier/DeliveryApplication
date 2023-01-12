@@ -10,7 +10,6 @@ import java.util.List;
 @Getter
 public class CreateOrderRequestBody {
     private final int customerId;
-    //private final int itemId;
     private final List<Integer> itemIds;
 
 }
